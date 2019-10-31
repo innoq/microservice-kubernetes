@@ -1,4 +1,6 @@
-FROM openjdk:10.0.2-jre-slim
-COPY target/microservice-kubernetes-demo-catalog-0.0.1-SNAPSHOT.jar .
-CMD /usr/bin/java -Xmx400m -Xms400m -jar microservice-kubernetes-demo-catalog-0.0.1-SNAPSHOT.jar
+FROM adoptopenjdk/openjdk11:alpine-jre
+COPY target/microservice-kubernetes-demo-catalog-0.0.1-SNAPSHOT.jar /microservice-kubernetes-demo-catalog-0.0.1-SNAPSHOT.jar
+
+ENTRYPOINT ["java", "-Xmx400m", "-Xms400m", "-XX:+UseContainerSupport", "-Djava.security.egd=file:/dev/./urandom","-jar","/microservice-kubernetes-demo-catalog-0.0.1-SNAPSHOT.jar"]
+
 EXPOSE 8080
